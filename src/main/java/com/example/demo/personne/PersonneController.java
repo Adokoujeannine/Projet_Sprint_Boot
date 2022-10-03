@@ -46,6 +46,8 @@ public class PersonneController {
         PersonneService.deletePersonne(PersonneId);
     }
     
+    // http://localhost:8080/api/p1/personne/1?nom=jeannine&email=jean@gmail.com
+    
       @PutMapping(path = "{PersonneId}")  
     public void updatePersonne(
                                 @PathVariable ("PersonneId") Long PersonneId,

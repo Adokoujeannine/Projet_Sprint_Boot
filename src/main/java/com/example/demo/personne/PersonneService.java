@@ -6,7 +6,9 @@
 package com.example.demo.personne;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,16 +34,42 @@ public class PersonneService {
     public void addNewPersonne(Personne personne){
          Optional<Personne> personneOptional = PersonneRepository.findPersonneByEmail(personne.getEmail());
                 if (personneOptional.isPresent()) {
-                throw new IllegalStateException("email taken");
+                throw new IllegalStateException("Email");
                 }
 
          PersonneRepository.save(personne);
-            
-        System.out.println(personne);
+           
     } 
-    
-  public void deletePersonne(long PersonneId){}
+   
+  public void deletePersonne(long PersonneId){
+      boolean exists = PersonneRepository.existsById(PersonneId);
+      if (!exists) {
+                throw new IllegalStateException("Personne avec Id:" + PersonneId + "n'existe pas");
+                    }
+      PersonneRepository.deleteById(PersonneId);
+  }
+
 //    
-//    public Personne modifierPersonne(Personne personne){}
-//    
+    @Transactional
+    void updatePersonne(Long PersonneId, String nom, String prenom, String email) {
+        Personne personne = PersonneRepository.findById(PersonneId)
+                .orElseThrow(()-> new IllegalStateException("Personne avec Id:" + PersonneId + "n'existe pas"));
+        
+        if(nom != null &&
+                nom.length()> 0 && !Objects.equals(personne.getNom(), nom)){
+            personne.setNom(nom);
+        }
+        
+        if(prenom != null &&
+                prenom.length()> 0 && !Objects.equals(personne.getPrenom(), prenom)){
+            personne.setPrenom(prenom);
+        }
+        
+         if(email != null &&
+                email.length()> 0 && !Objects.equals(personne.getEmail(), email)){
+            personne.setEmail(email);
+        }
+         
+    }
+ 
 }

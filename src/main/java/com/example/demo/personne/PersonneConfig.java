@@ -28,7 +28,7 @@ public class PersonneConfig {
         "AGNAYO",
         "mariam",
         "mariam@gmail.com",
-        LocalDate.of(2022, Month.MARCH, 21)
+        LocalDate.of(1993, Month.MARCH, 1)
          
          );
          
@@ -36,7 +36,7 @@ public class PersonneConfig {
         "ADOKOU",
         "jeanne",
         "jeannineadokou@gmail.com",
-        LocalDate.of(2020, Month.JANUARY, 21)
+        LocalDate.of(2002, Month.JANUARY, 5)
         
          );
          
@@ -44,7 +44,7 @@ public class PersonneConfig {
         "SIAKU",
         "clotilde",
         "clotilde@gmail.com",
-        LocalDate.of(2021, Month.APRIL, 21)
+        LocalDate.of(2011, Month.APRIL, 18)
         
          );
          
